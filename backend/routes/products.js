@@ -10,7 +10,8 @@ router.get("/get-all", async (req,res) => {
         res.status(200).json(products);
     }
     catch(error){
-        console.log(error);
+        res.status(500).json(error);
+
     }
 })
 
@@ -21,7 +22,8 @@ router.put("/update", async (req,res) => {
         res.status(200).json("Product updated successfully");
     }
     catch(error){
-        console.log(error);
+        res.status(500).json(error);
+
     }
 })
 
@@ -32,7 +34,8 @@ router.delete("/delete", async (req,res) => {
         res.status(200).json("Product deleted successfully");
     }
     catch(error){
-        console.log(error);
+        res.status(500).json(error);
+
     }
 })
 
@@ -44,7 +47,7 @@ router.post("/add", async (req,res) => {
         res.status(200).json("Product added successfully")
     }
     catch(error){
-        res.status(400).json(error);
+        res.status(500).json(error);
     }
 })
 
