@@ -1,9 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv")
 
+const categoryRoute = require("./routes/categories");
 
 dotenv.config(); 
+const app = express();
+const port = 5000;
+
 
 const connect = async () => {
     try {
@@ -14,8 +19,10 @@ const connect = async () => {
     }
 }
 
-const app = express();
-const port = 5000;
+app.use(express.json());
+app.use(cors());
+
+app.use("/api/categories", categoryRoute)
 
 app.get("/", (req,res) => res.send("Hello world"))
 
