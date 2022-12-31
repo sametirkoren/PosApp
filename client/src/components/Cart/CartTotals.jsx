@@ -17,8 +17,8 @@ function CartTotals() {
                         <div className='flex items-center'>
                             <img onClick={() => dispatch(deleteCart(item))} src={item.image} alt={item.title} className='w-16 h-16 object-cover' />
                             <div className='flex flex-col ml-2'>
-                                <b>{item.title}</b>
-                                <span>{item.price}₺ x {item.quantity}</span>
+                                <b className='dark:text-white'>{item.title}</b>
+                                <span className='dark:text-white'>{item.price}₺ x {item.quantity}</span>
                             </div>
                         </div>
                         <div className='flex items-center gap-x-1'>
@@ -26,39 +26,39 @@ function CartTotals() {
                                 dispatch(increase(item))
                                 message.success("Ürün Sepete Eklendi")
                             }} icon={<PlusCircleOutlined />} type='primary' size='small' className='w-full flex items-center justify-center !rounded-full' />
-                            <span className='font-bold'>{item.quantity}</span>
+                            <span className='font-bold dark:text-white'>{item.quantity}</span>
                             <Button onClick={() => {
                                  dispatch(decrease(item))
                                  message.success("Ürün Sepetten Silindi")
                             }} icon={<MinusCircleOutlined />} type='primary' size='small' className='w-full flex items-center justify-center !rounded-full' />
                         </div>
                     </li>
-                )): <div className='flex justify-center items-center h-screen font-bold'>Sepette hiç ürün yok</div>}
+                )): <div className='flex justify-center items-center h-screen font-bold dark:text-white'>Sepette hiç ürün yok</div>}
 
             </ul>
             <div className='cart-totals mt-auto'>
                 <div className='border-t border-b'>
                     <div className='flex justify-between p-2'>
-                        <b>Ara Toplam</b>
-                        <span>{(cart.total).toFixed(2)}₺</span>
+                        <b className='dark:text-white'>Ara Toplam</b>
+                        <span className='dark:text-white'>{(cart.total).toFixed(2)}₺</span>
                     </div>
                     <div className='flex justify-between p-2'>
-                        <b>KDV %{cart.tax}</b>
+                        <b className='dark:text-white'>KDV %{cart.tax}</b>
                         <span className='text-red-700'>+{((cart.total * cart.tax) / 100).toFixed(2)}₺</span>
                     </div>
                 </div>
                 <div className='border-b mt-4'>
                     <div className='flex justify-between p-2'>
-                        <b className='text-xl text-green-500'>Genel Toplam</b>
-                        <span className='text-xl'>{((cart.total + (cart.total * cart.tax) / 100)).toFixed(2)}₺</span>
+                        <b className='text-xl text-green-500 '>Genel Toplam</b>
+                        <span className='text-xl dark:text-white'>{((cart.total + (cart.total * cart.tax) / 100)).toFixed(2)}₺</span>
                     </div>
                 </div>
                 <div className='py-4 px-2'>
-                    <Button disabled={cart.cartItems.length === 0} type='primary' size='large' className='w-full'>Sipariş Oluştur</Button>
+                    <Button disabled={cart.cartItems.length === 0} type='primary' size='large' className='w-full dark:text-white'>Sipariş Oluştur</Button>
                     <Button disabled={cart.cartItems.length === 0} onClick={() => {
                         dispatch(reset())
                         message.success("Sepet Temizlendi.")
-                    }} icon={<ClearOutlined />} type='primary' size='large' className='w-full mt-2 flex items-center justify-center' danger>Temizle</Button>
+                    }} icon={<ClearOutlined />} type='primary' size='large' className='dark:text-white w-full mt-2 flex items-center justify-center'>Temizle</Button>
                 </div>
             </div>
         </div>

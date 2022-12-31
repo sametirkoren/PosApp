@@ -39,8 +39,8 @@ function InvoicePage() {
       ];
   return <>
     <Header />
-    <div className='px-6'>
-        <h1 className='text-4xl font-bold text-center mb-4'>Faturalar</h1>
+    <div className='px-6 h-screen'>
+        <h1 className='text-4xl font-bold text-center mb-4 dark:text-white'>Faturalar</h1>
         <Table dataSource={dataSource} columns={columns} pagination={false}  bordered/>
         <div className="cart-total flex justify-end mt-4">
             <Card className='w-72'>

@@ -14,6 +14,11 @@ body {
     background-color: #1677ff;
   }
 
+.anticon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @media (min-width: 768px) {
   body{

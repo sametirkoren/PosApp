@@ -100,10 +100,10 @@ function StatisticPage() {
 
   return <>
     <Header />
-    <div className='px-6 md:pb-0 pb-20'>
-        <h1 className='text-4xl font-bold text-center mb-4'>İstatistikler</h1>
+    <div className='px-6 md:pb-0 pb-20 h-screen'>
+        <h1 className='text-4xl font-bold text-center mb-4 dark:text-white'>İstatistikler</h1>
         <div className='statistic-section'>
-          <h2 className="text-lg">
+          <h2 className="text-lg dark:text-white">
             Hoş geldin{" "}
             <span className="text-green-700 font-bold text-xl">admin</span>
           </h2>
