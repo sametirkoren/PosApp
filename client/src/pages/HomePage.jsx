@@ -30,7 +30,7 @@ function HomePage() {
  
 
   return (
-    <><Header /><div className="home px-6 flex md:flex-row flex-col justify-between gap-10 md:pb-0 pb-24">
+    <><Header /><div className="home px-6 flex md:flex-row flex-col justify-between gap-10 md:pb-0 pb-24 h-screen">
           <div className="categories overflow-auto max-h-[calc(100vh_-_112px)] md:pb-10">
               <Categories categories={categories} setCategories={setCategories} />
           </div>
