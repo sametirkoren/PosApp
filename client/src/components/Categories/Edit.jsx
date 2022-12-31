@@ -28,14 +28,26 @@ function Edit({ isEditModalOpen, setIsEditModalOpen, categories, setCategories }
         }
     }
 
-    const deleteCategory = (id) => {
+    const deleteCategory = async (id) => {
         try {
-            axios
-                .delete("http://localhost:5000/api/categories/delete", JSON.stringify({categoryId: id}), {
-                    headers: {
-                        'content-type': 'application/json',
-                    }
-                })
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            
+            var raw = JSON.stringify({
+              "categoryId": id
+            });
+            
+            var requestOptions = {
+              method: 'DELETE',
+              headers: myHeaders,
+              body: raw,
+              redirect: 'follow'
+            };
+            
+            fetch("http://localhost:5000/api/categories/delete", requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
             message.success("Kategori başarıyla silindi");
             setCategories(categories.filter((item) => item._id !== id ))
         } catch (error) {
