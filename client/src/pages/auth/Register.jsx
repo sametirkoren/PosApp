@@ -1,14 +1,44 @@
-import { Button, Carousel, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Carousel, Form, Input, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import AuthCarousel from "../../components/Auth/AuthCarousel";
-
+import axios from 'axios';
+import { useState } from "react";
 const Register = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const onFinish = (values) => {
+    setLoading(true);
+    try {
+      axios
+        .post("http://localhost:5000/api/auth/register", JSON.stringify(values), {
+          headers: {
+            'content-type': 'application/json',
+          }
+        }).then(res => {
+          console.log(res.status)
+          if (res.status === 200) {
+            message.success("Kayıt başarıyla tamamlandı");
+            navigate("/login");
+            setLoading(false);
+
+          } 
+        }).catch(function (error) {
+          message.error("Kayıt sırasında hata oluştu");
+          setLoading(false);
+
+        })
+
+    } catch (error) {
+      message.error("Kayıt sırasında hata oluştu");
+      setLoading(false);
+    }
+  }
   return (
     <div className="h-screen">
       <div className="flex justify-between h-full">
         <div className="xl:px-20 px-10 w-full flex flex-col h-full justify-center relative">
-          <h1 className="text-center text-5xl font-bold mb-2">LOGO</h1>
-          <Form layout="vertical">
+          <h1 className="text-center text-5xl font-bold mb-2">BATTIK.COM</h1>
+          <Form layout="vertical" onFinish={onFinish}>
             <Form.Item
               label="Kullanıcı Adı"
               name={"username"}
@@ -72,6 +102,7 @@ const Register = () => {
                 htmlType="submit"
                 className="w-full"
                 size="large"
+                loading={loading}
               >
                 Kaydol
               </Button>

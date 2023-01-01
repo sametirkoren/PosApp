@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv")
-
+const logger = require("morgan");
 const categoryRoute = require("./routes/categories");
 const productRoute = require("./routes/products");
 const invoiceRoute = require("./routes/invoices");
@@ -22,7 +22,7 @@ const connect = async () => {
         console.log(error);
     }
 }
-
+app.use(logger("dev"))
 app.use(express.json());
 app.use(cors());
 

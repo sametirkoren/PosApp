@@ -1,15 +1,46 @@
-import { Button, Carousel, Checkbox, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Carousel, Checkbox, Form, Input, message } from "antd";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import AuthCarousel from "../../components/Auth/AuthCarousel";
-
+import axios from 'axios';
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const onFinish = (values) => {
+    setLoading(true);
+    try {
+      axios
+        .post("http://localhost:5000/api/auth/login", JSON.stringify(values), {
+          headers: {
+            'content-type': 'application/json',
+          }
+        }).then(res => {
+          if (res.status === 200) {
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                username: res.data.username,
+                email: res.data.email
+              })
+            )
+            message.success("Başarılı giriş yapıldı");
+            navigate("/");
+          }
+        }).catch(function (error) {
+          message.error("Giriş sırasında hata oluştu");
+        })
+        setLoading(false);
+    } catch (error) {
+      message.error("Giriş sırasında hata oluştu");
+    }
+  }
   return (
     <div className="h-screen">
       <div className="flex justify-between h-full">
         <div className="xl:px-20 px-10 w-full flex flex-col h-full justify-center relative">
-          <h1 className="text-center text-5xl font-bold mb-2">LOGO</h1>
-          <Form layout="vertical">
-        
+          <h1 className="text-center text-5xl font-bold mb-2">BATTIK.COM</h1>
+          <Form layout="vertical" onFinish={onFinish}>
+
             <Form.Item
               label="E-mail"
               name={"email"}
@@ -36,18 +67,19 @@ const Login = () => {
             </Form.Item>
 
             <Form.Item name="remember" valuePropName="checked">
-                <div className="flex justify-between items-center">
-                    <Checkbox>Beni Hatırla</Checkbox>
-                    <Link>Şifremi Unuttum</Link>
-                </div>
+              <div className="flex justify-between items-center">
+                <Checkbox>Beni Hatırla</Checkbox>
+                <Link>Şifremi Unuttum</Link>
+              </div>
             </Form.Item>
-          
+
             <Form.Item>
               <Button
                 type="primary"
                 htmlType="submit"
                 className="w-full"
                 size="large"
+                loading={loading}
               >
                 Giriş Yap
               </Button>

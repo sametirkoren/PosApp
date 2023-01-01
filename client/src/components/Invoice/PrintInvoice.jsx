@@ -18,7 +18,7 @@ const PrintInvoice = ({ selectedInvoice, isModalOpen, setIsModalOpen }) => {
         <div className="max-w-5xl mx-auto bg-white px-6">
           <article className="overflow-hidden">
             <div className="logo my-6">
-              <h2 className="text-4xl font-bold text-slate-700">LOGO</h2>
+              <h2 className="text-4xl font-bold text-slate-700">BATTIK.COM</h2>
             </div>
             <div className="invoice-details">
               <div className="grid sm:grid-cols-4 grid-cols-3 gap-12">
@@ -45,7 +45,7 @@ const PrintInvoice = ({ selectedInvoice, isModalOpen, setIsModalOpen }) => {
                     <p className="font-bold text-slate-700 mt-2">
                       Veriliş Tarihi:
                     </p>
-                    <p>{selectedInvoice?.createdAt}</p>
+                    <p>{selectedInvoice?.createdAt.substring(0,10)}</p>
                   </div>
                 </div>
                 <div className="text-md text-slate-500 sm:block hidden">
