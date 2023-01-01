@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { reset } from '../../redux/cartSlice';
+import { INVOICE_ENDPOINT } from '../../common/urls';
 
 function CreateInvoice({ isModalOpen, setIsModalOpen }) {
     const cart = useSelector((state) => state.cart);
@@ -13,7 +14,7 @@ function CreateInvoice({ isModalOpen, setIsModalOpen }) {
     const onFinish = (values) => {
         try {
             axios
-                .post("http://localhost:5000/api/invoices/add", JSON.stringify({ ...values, cartItems: cart.cartItems, subTotal: cart.total, tax: ((cart.total * cart.tax) / 100).toFixed(2), totalAmount: (cart.total + (cart.total * cart.tax) / 100).toFixed(2) }), {
+                .post(`${INVOICE_ENDPOINT}/add`, JSON.stringify({ ...values, cartItems: cart.cartItems, subTotal: cart.total, tax: ((cart.total * cart.tax) / 100).toFixed(2), totalAmount: (cart.total + (cart.total * cart.tax) / 100).toFixed(2) }), {
                     headers: {
                         'content-type': 'application/json',
                     }

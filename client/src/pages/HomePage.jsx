@@ -18,7 +18,7 @@ function HomePage() {
         const fetch = async () => {
             try {
                 axios
-                    .get(CATEGORY_ENDPOINT)
+                    .get(`${CATEGORY_ENDPOINT}/get-all`)
                     .then(res => {
                         res.data && setCategories(res.data.map((item) => { return { ...item, value: item.title } }));
 
@@ -35,7 +35,7 @@ function HomePage() {
         const fetch = async () => {
             try {
                 axios
-                    .get(PRODUCT_ENDPOINT)
+                    .get(`${PRODUCT_ENDPOINT}/get-all`)
                     .then(res => {
                         setProducts(res.data);
                         dispatch(productList(res.data))

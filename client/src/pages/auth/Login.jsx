@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthCarousel from "../../components/Auth/AuthCarousel";
 import axios from 'axios';
+import { AUTH_ENDPOINT } from "../../common/urls";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Login = () => {
     setLoading(true);
     try {
       axios
-        .post("http://localhost:5000/api/auth/login", JSON.stringify(values), {
+        .post(`${AUTH_ENDPOINT}/login`, JSON.stringify(values), {
           headers: {
             'content-type': 'application/json',
           }

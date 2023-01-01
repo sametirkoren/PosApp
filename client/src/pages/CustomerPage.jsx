@@ -16,7 +16,7 @@ function CustomerPage() {
     const fetch = async () => {
       try {
         axios
-          .get(INVOICE_ENDPOINT)
+          .get(`${INVOICE_ENDPOINT}/get-all`)
           .then(res => {
             setInvoices(res.data);
 

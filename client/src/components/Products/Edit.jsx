@@ -17,7 +17,7 @@ function Edit() {
        const fetch = async () => {
            try {
                axios
-               .get(CATEGORY_ENDPOINT)
+               .get(`${CATEGORY_ENDPOINT}/get-all`)
                .then(res => {
                         res.data && setCategories(res.data.map((item) => {return {...item, value: item.title}}));
    
@@ -34,7 +34,7 @@ function Edit() {
         const fetch = async () => {
           try {
             axios
-              .get(PRODUCT_ENDPOINT)
+              .get(`${PRODUCT_ENDPOINT}/get-all`)
               .then(res => {
                 setProducts(res.data);
     
@@ -50,7 +50,7 @@ function Edit() {
     const onFinish = (values) => {
         try {
             axios
-                .put("http://localhost:5000/api/products/update", JSON.stringify({ ...values, productId: editingItem._id}), {
+                .put(`${PRODUCT_ENDPOINT}/update`, JSON.stringify({ ...values, productId: editingItem._id}), {
                     headers: {
                         'content-type': 'application/json',
                     }
@@ -84,7 +84,7 @@ function Edit() {
               redirect: 'follow'
             };
             
-            fetch("http://localhost:5000/api/products/delete", requestOptions)
+            fetch(`${PRODUCT_ENDPOINT}/delete`, requestOptions)
               .then(response => response.text())
               .then(result => console.log(result))
               .catch(error => console.log('error', error));

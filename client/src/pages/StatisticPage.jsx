@@ -15,7 +15,7 @@ function StatisticPage() {
   }, []);
 
   const asyncFetch = () => {
-    fetch(INVOICE_ENDPOINT)
+    fetch(`${INVOICE_ENDPOINT}/get-all`)
       .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => {

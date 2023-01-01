@@ -1,6 +1,7 @@
 import { Button, Form, Input, message, Modal } from 'antd'
 import axios from 'axios';
 import React from 'react'
+import { CATEGORY_ENDPOINT } from '../../common/urls';
 
 function Add({ isAddModalOpen, setIsAddModalOpen, categories, setCategories }) {
 
@@ -9,7 +10,7 @@ function Add({ isAddModalOpen, setIsAddModalOpen, categories, setCategories }) {
     const onFinish = (values) => {
         try {
             axios
-                .post("http://localhost:5000/api/categories/add", values, {
+                .post(`${CATEGORY_ENDPOINT}/add`, values, {
                     headers: {
                         'content-type': 'application/json',
                     }

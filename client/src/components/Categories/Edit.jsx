@@ -1,6 +1,7 @@
 import { Button, Form, Input, message, Modal, Table } from 'antd'
 import axios from 'axios';
 import React, { useState } from 'react'
+import { CATEGORY_ENDPOINT } from '../../common/urls';
 
 function Edit({ isEditModalOpen, setIsEditModalOpen, categories, setCategories }) {
 
@@ -10,7 +11,7 @@ function Edit({ isEditModalOpen, setIsEditModalOpen, categories, setCategories }
     const onFinish = (values) => {
         try {
             axios
-                .put("http://localhost:5000/api/categories/update", JSON.stringify({ ...values, categoryId: editingRow._id }), {
+                .put(`${CATEGORY_ENDPOINT}/update`, JSON.stringify({ ...values, categoryId: editingRow._id }), {
                     headers: {
                         'content-type': 'application/json',
                     }
@@ -44,7 +45,7 @@ function Edit({ isEditModalOpen, setIsEditModalOpen, categories, setCategories }
               redirect: 'follow'
             };
             
-            fetch("http://localhost:5000/api/categories/delete", requestOptions)
+            fetch(`${CATEGORY_ENDPOINT}/delete`, requestOptions)
               .then(response => response.text())
               .then(result => console.log(result))
               .catch(error => console.log('error', error));
