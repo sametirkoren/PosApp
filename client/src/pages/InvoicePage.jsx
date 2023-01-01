@@ -1,54 +1,92 @@
-import { Button, Card, Table } from 'antd'
+import { Button, Card, message, Table } from 'antd'
 import React, {useState} from 'react'
+import { useEffect } from 'react';
+import { INVOICE_ENDPOINT } from '../common/urls';
 import Header from '../components/Header/Header'
 import PrintInvoice from '../components/Invoice/PrintInvoice';
+import axios from 'axios';
 
 function InvoicePage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const dataSource = [
-        {
-          key: '1',
-          name: 'Mike',
-          age: 32,
-          address: '10 Downing Street',
-        },
-        {
-          key: '2',
-          name: 'John',
-          age: 42,
-          address: '10 Downing Street',
-        },
-      ];
+    const [invoices, setInvoices] = useState([]);
+    const [selectedInvoice, setSelectedInvoice] = useState();
+    useEffect(() => {
+      const fetch = async () => {
+        try {
+            axios
+            .get(INVOICE_ENDPOINT)
+            .then(res => {
+                     setInvoices(res.data);
+
+            });
+        } catch (error) {
+            message.error("Faturaları çekerken sorun oluştu");
+            return [];
+        }
+    }
+    fetch();
+
+    }, [])
       
       const columns = [
         {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
+          title: 'Müşteri Adı',
+          dataIndex: 'customerName',
+          key: 'customerName',
         },
         {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
+          title: 'Telefon Numarası',
+          dataIndex: 'customerPhoneNumber',
+          key: 'customerPhoneNumber',
         },
         {
-          title: 'Address',
-          dataIndex: 'address',
-          key: 'address',
+          title: 'Oluşturma Tarihi',
+          dataIndex: 'createdAt',
+          key: 'createdAt',
+          render: (text) => {
+            return (
+              <span>{text.substring(0,10)}</span>
+            )
+          }
+        },
+        {
+          title: 'Ödeme Yöntemi',
+          dataIndex: 'paymentMethod',
+          key: 'paymentMethod',
+        },
+        {
+          title: 'Toplam Fiyat',
+          dataIndex: 'totalAmount',
+          key: 'totalAmount',
+          render: (text) => {
+            return (
+              <span>{text}₺</span>
+            )
+          }
+        },
+        {
+          title: 'Aksiyonlar',
+          dataIndex: 'actions',
+          key: 'actions',
+          render: (_, record) => {
+            return (
+              <Button  onClick={() => {
+                setIsModalOpen(true)
+                setSelectedInvoice(record)
+              }} type="link" className='pl-0'>Yazdır</Button>
+            )
+          }
         },
       ];
   return <>
     <Header />
     <div className='px-6 h-screen'>
         <h1 className='text-4xl font-bold text-center mb-4 dark:text-white'>Faturalar</h1>
-        <Table dataSource={dataSource} columns={columns} pagination={false}  bordered/>
-        <div className="cart-total flex justify-end mt-4">
-            <Card className='w-72'>
-                <Button onClick={() => setIsModalOpen(true)} className='mt-4 w-full' type='primary' size='large'>Yazdır</Button>
-            </Card>
-        </div>
+        <Table dataSource={invoices} columns={columns} pagination={false}  bordered scroll={{
+          y:300
+        }}/>
     </div>
-    <PrintInvoice isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+    <PrintInvoice selectedInvoice={selectedInvoice} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
   </>
 }
 

@@ -3,10 +3,12 @@ import { ClearOutlined, PlusCircleOutlined, MinusCircleOutlined } from '@ant-des
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { decrease, deleteCart, increase, reset } from '../../redux/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 function CartTotals() {
     const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     return (
         <div className='cart h-full max-h-[calc(100vh_-_90px)] flex flex-col'>
@@ -33,7 +35,7 @@ function CartTotals() {
                             }} icon={<MinusCircleOutlined />} type='primary' size='small' className='w-full flex items-center justify-center !rounded-full' />
                         </div>
                     </li>
-                )): <div className='flex justify-center items-center h-screen font-bold dark:text-white'>Sepette hiç ürün yok</div>}
+                )).reverse(): <div className='flex justify-center items-center h-screen font-bold dark:text-white'>Sepette hiç ürün yok</div>}
 
             </ul>
             <div className='cart-totals mt-auto'>
@@ -54,7 +56,7 @@ function CartTotals() {
                     </div>
                 </div>
                 <div className='py-4 px-2'>
-                    <Button disabled={cart.cartItems.length === 0} type='primary' size='large' className='w-full dark:text-white'>Sipariş Oluştur</Button>
+                    <Button onClick={() => navigate("/cart")}  disabled={cart.cartItems.length === 0} type='primary' size='large' className='w-full dark:text-white'>Sipariş Oluştur</Button>
                     <Button disabled={cart.cartItems.length === 0} onClick={() => {
                         dispatch(reset())
                         message.success("Sepet Temizlendi.")

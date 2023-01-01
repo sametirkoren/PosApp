@@ -25,7 +25,7 @@ function Header() {
                         <HomeOutlined className='md:text-2xl text-xl dark:text-white' />
                         <span className='md:text-xs text-[10px] dark:text-white'>Ana Sayfa</span>
                     </Link>
-                    <Badge count={cart.cartItems.length} offset={[0, 6]} className="md:flex hidden">
+                    <Badge count={cart.cartItems.length} offset={[0, 0]} className="md:flex hidden">
                         <Link to="/cart" className='menu-link flex flex-col hover:text-[#40a9ff] transition-all'>
                             <ShoppingCartOutlined className='md:text-2xl text-xl dark:text-white' />
                             <span className='md:text-xs text-[10px] dark:text-white'>Sepet</span>
@@ -48,7 +48,7 @@ function Header() {
                         <span className='md:text-xs text-[10px] dark:text-white'>Çıkış</span>
                     </Link>
                 </div>
-                <Badge count={5} offset={[0, 6]} className="md:hidden flex">
+                <Badge count={5} offset={[0, 0]} className="md:hidden flex">
                     <Link href="/" className='menu-link flex flex-col hover:text-[#40a9ff] transition-all'>
                         <ShoppingCartOutlined className='text-2xl' />
                         <span className='md:text-xs text-[10px]'>Sepet</span>
