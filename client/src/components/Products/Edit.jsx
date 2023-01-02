@@ -167,7 +167,7 @@ function Edit() {
                 <Form.Item name="price" label="Ürün Fiyatı" rules={[
                     { required: true, message: "Ürün Fiyatı Alanı Boş Geçilemez" }
                 ]}>
-                    <Input  placeholder='Ürün Fiyatı Giriniz' type='number'/>
+                    <Input  placeholder='Ürün Fiyatı Giriniz' min={0} max={100000} type='number'/>
                 </Form.Item>
                 <Form.Item name="category" label="Kategori" rules={[
                     { required: true, message: "Kategori Alanı Boş Geçilemez" }

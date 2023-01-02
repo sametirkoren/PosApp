@@ -173,7 +173,7 @@ function CustomerPage() {
   return <>
     <Header />
     <div className='px-6 h-screen'>
-      {invoices ? (<><h1 className='text-4xl font-bold text-center mb-4 dark:text-white'>Müşteriler</h1><Table dataSource={invoices} columns={columns} pagination={false} bordered /></>) : <Spin size='large' className='absolute top-1/2 h-screen w-screen flex justify-center' />}
+      {invoices ? (<><h1 className='text-4xl font-bold text-center mb-4 dark:text-white'>Müşteriler</h1><Table dataSource={invoices} columns={columns} pagination={false} bordered scroll={{y: 600}} /></>) : <Spin size='large' className='absolute top-1/2 h-screen w-screen flex justify-center' />}
 
     </div>
   </>
